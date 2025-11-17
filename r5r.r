@@ -81,7 +81,7 @@ options(java.parameters = "-Xmx16G")
 cityhall_lon <- -75.1636
 cityhall_lat <-  39.9526
 destinations <- tibble(id = "CityHall", lon = cityhall_lon, lat = cityhall_lat)
-departure_time <- ymd_hms("2025-10-16 11:30:00")
+departure_time <- ymd_hms("2025-10-16 12:00:00")
 # ---------------------------
 # 3) (Optional) Limit tracts to those overlapping GTFS service area
 #     by buffering GTFS stops and intersecting (SIMPLE PATHS)
@@ -122,7 +122,7 @@ walk_speed        <- 1.3   # m/s ~ 10.8 km/h if you want 1.3 m/s typical, change
 
 #Function 1: Setup R5 core and build network
 setup_r5_core <-build_network(
-    data_path = "data/cut_network_build",
+    data_path = "data/data_path_after",
     verbose = FALSE,
     temp_dir = TRUE,
     elevation = "NONE",
@@ -153,28 +153,150 @@ compute_travel_time_matrix <- function(network, origins_df, destinations_df, dep
 }
 
 
-# before_cuts<-compute_travel_time_matrix(setup_r5_core, origins_served, destinations, departure_time,
+# before_cuts6<-compute_travel_time_matrix(setup_r5_core, origins_served, destinations, departure_time,
 #                                        modes, max_trip_duration, walk_speed)
 # write.csv(before_cuts, "data/outputs/before_cuts.csv")
 
-# before_cuts_non_peak<-compute_travel_time_matrix(setup_r5_core, origins_served, destinations, departure_time,
+# before_cuts_non_peak6<-compute_travel_time_matrix(setup_r5_core, origins_served, destinations, departure_time,
 #                                        modes, max_trip_duration, walk_speed)
 # write.csv(before_cuts_non_peak, "data/outputs/before_cuts_non_peak.csv")
 
 
 
-# after_cuts<-compute_travel_time_matrix(setup_r5_core, origins_served, destinations, departure_time,
+# after_cuts6<-compute_travel_time_matrix(setup_r5_core, origins_served, destinations, departure_time,
 #                                        modes, max_trip_duration, walk_speed)
 # write.csv(after_cuts, "data/outputs/after_cuts.csv")
-# after_cuts_peak<-compute_travel_time_matrix(setup_r5_core, origins_served, destinations, departure_time,
+# after_cuts_non_peak6<-compute_travel_time_matrix(setup_r5_core, origins_served, destinations, departure_time,
 #                                        modes, max_trip_duration, walk_speed)
 # write.csv(after_cuts_peak, "data/outputs/after_cuts_peak.csv")
 
+# before_cuts_non_peak<- before_cuts_non_peak%>%
+#   select(-to_id)
+# before_cuts_non_peak<- before_cuts_non_peak%>%
+#   rename(travel_time1=travel_time_p50)
+# before_cuts_non_peak1<- before_cuts_non_peak1%>%
+#   select(-to_id)%>%
+#   rename(travel_time2=travel_time_p50)
+# before_cuts_non_peak2<- before_cuts_non_peak2%>%
+#   select(-to_id)%>%
+#   rename(travel_time3=travel_time_p50)
+# before_cuts_non_peak3<- before_cuts_non_peak3%>%
+#   select(-to_id)%>%
+#   rename(travel_time4=travel_time_p50)
+# before_cuts_non_peak4<- before_cuts_non_peak4%>%
+#   select(-to_id)%>%
+#   rename(travel_time5=travel_time_p50)
+# before_cuts_non_peak5<- before_cuts_non_peak5%>%
+#   select(-to_id)%>%
+#   rename(travel_time6=travel_time_p50)
+# before_cuts_non_peak6<- before_cuts_non_peak6%>%
+#   select(-to_id)%>%
+#   rename(travel_time7=travel_time_p50)
+# before_cuts_non_peak_final<- before_cuts_non_peak%>%
+#   left_join(before_cuts_non_peak1, by="from_id")%>%
+#   left_join(before_cuts_non_peak2, by="from_id")%>%
+#   left_join(before_cuts_non_peak3, by="from_id")%>%
+#   left_join(before_cuts_non_peak4, by="from_id")%>%
+#   left_join(before_cuts_non_peak5, by="from_id")%>%
+#   left_join(before_cuts_non_peak6, by="from_id")
+#
+# before_cuts_non_peak_final<- before_cuts_non_peak_final%>%
+#   mutate(average=(rowSums(across(starts_with("travel_time"))))/7)
+#
+# write.csv(before_cuts_non_peak_final, "data/outputs/before_cuts_non_peak_final.csv")
 
+# before_cuts6<- before_cuts6%>%
+#   select(-to_id)%>%
+#   rename(travel_time1=travel_time_p50)
+# before_cuts1<- before_cuts1%>%
+#   select(-to_id)%>%
+#   rename(travel_time2=travel_time_p50)
+# before_cuts2<- before_cuts2%>%
+#   select(-to_id)%>%
+#   rename(travel_time3=travel_time_p50)
+# before_cuts3<- before_cuts3%>%
+#   select(-to_id)%>%
+#   rename(travel_time4=travel_time_p50)
+# before_cuts4<- before_cuts4%>%
+#   select(-to_id)%>%
+#   rename(travel_time5=travel_time_p50)
+# before_cuts5<- before_cuts5%>%
+#   select(-to_id)%>%
+#   rename(travel_time6=travel_time_p50)
+# before_cuts<- before_cuts%>%
+#   select(-to_id)%>%
+#   rename(travel_time7=travel_time_p50)
+# before_cuts_final<- before_cuts%>%
+#   left_join(before_cuts1, by="from_id")%>%
+#   left_join(before_cuts2, by="from_id")%>%
+#   left_join(before_cuts3, by="from_id")%>%
+#   left_join(before_cuts4, by="from_id")%>%
+#   left_join(before_cuts5, by="from_id")%>%
+#   left_join(before_cuts6, by="from_id")
+# before_cuts_final<- before_cuts_final%>%
+#   mutate(average=(rowSums(across(starts_with("travel_time"))))/7)
+# write.csv(before_cuts_final, "data/outputs/before_cuts_peak_final.csv")
 
+# after_cuts6<- after_cuts6%>%
+#   select(-to_id)%>%
+#   rename(travel_time1=travel_time_p50)
+# after_cuts1<- after_cuts1%>%
+#   select(-to_id)%>%
+#   rename(travel_time2=travel_time_p50)
+# after_cuts2<- after_cuts2%>%
+#   select(-to_id)%>%
+#   rename(travel_time3=travel_time_p50)
+# after_cuts3<- after_cuts3%>%
+#   select(-to_id)%>%
+#   rename(travel_time4=travel_time_p50)
+# after_cuts4<- after_cuts4%>%
+#   select(-to_id)%>%
+#   rename(travel_time5=travel_time_p50)
+# after_cuts5<- after_cuts5%>%
+#   select(-to_id)%>%
+#   rename(travel_time6=travel_time_p50)
+# after_cuts<- after_cuts%>%
+#   select(-to_id)%>%
+#   rename(travel_time7=travel_time_p50)
+# after_cuts_final<- after_cuts%>%
+#   left_join(after_cuts1, by="from_id")%>%
+#   left_join(after_cuts2, by="from_id")%>%
+#   left_join(after_cuts3, by="from_id")%>%
+#   left_join(after_cuts4, by="from_id")%>%
+#   left_join(after_cuts5, by="from_id")%>%
+#   left_join(after_cuts6, by="from_id")
+# after_cuts_final<- after_cuts_final%>%
+#   mutate(average=(rowSums(across(starts_with("travel_time"))))/7)
+# write.csv(after_cuts_final, "data/outputs/after_cuts_peak_final.csv")
 
-
-
-
-
-
+# after_cuts_non_peak6<- after_cuts_non_peak6%>%
+#   select(-to_id)%>%
+#   rename(travel_time1=travel_time_p50)
+# after_cuts_non_peak1<- after_cuts_non_peak1%>%
+#   select(-to_id)%>%
+#   rename(travel_time2=travel_time_p50)
+# after_cuts_non_peak2<- after_cuts_non_peak2%>%
+#   select(-to_id)%>%
+#   rename(travel_time3=travel_time_p50)
+# after_cuts_non_peak3<- after_cuts_non_peak3%>%
+#   select(-to_id)%>%
+#   rename(travel_time4=travel_time_p50)
+# after_cuts_non_peak4<- after_cuts_non_peak4%>%
+#   select(-to_id)%>%
+#   rename(travel_time5=travel_time_p50)
+# after_cuts_non_peak5<- after_cuts_non_peak5%>%
+#   select(-to_id)%>%
+#   rename(travel_time6=travel_time_p50)
+# after_cuts_non_peak<- after_cuts_non_peak%>%
+#   select(-to_id)%>%
+#   rename(travel_time7=travel_time_p50)
+# after_cuts_non_peak_final<- after_cuts_non_peak%>%
+#   left_join(after_cuts_non_peak1, by="from_id")%>%
+#   left_join(after_cuts_non_peak2, by="from_id")%>%
+#   left_join(after_cuts_non_peak3, by="from_id")%>%
+#   left_join(after_cuts_non_peak4, by="from_id")%>%
+#   left_join(after_cuts_non_peak5, by="from_id")%>%
+#   left_join(after_cuts_non_peak6, by="from_id")
+# after_cuts_non_peak_final<- after_cuts_non_peak_final%>%
+#   mutate(average=(rowSums(across(starts_with("travel_time"))))/7)
+# write.csv(after_cuts_non_peak_final, "data/outputs/after_cuts_non_peak_final.csv")
