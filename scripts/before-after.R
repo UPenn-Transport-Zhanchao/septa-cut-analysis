@@ -49,14 +49,14 @@ summary(non_peak_comparison$change > 0)
 
 # joined to census tract shapefile
 peak_comparison <- peak_comparison %>%
-  mutate(GEOID=as.character(from_id))
+  mutate(GEOID = as.character(from_id))
 peak_sf <- tracts %>%
   left_join(peak_comparison, by = "GEOID")
 peak_sf <- peak_sf %>%
   filter(!is.na(change))
 
-non_peak_comparison <- non_peak_comparison %>%
-  mutate(GEOID=as.character(from_id))
+non_peak_comparison<- non_peak_comparison%>%
+  mutate(GEOID = as.character(from_id))
 non_peak_sf <- tracts %>%
   left_join(non_peak_comparison, by = "GEOID")
 non_peak_sf <- non_peak_sf %>%
