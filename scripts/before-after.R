@@ -87,10 +87,6 @@ pal_nonpeak <- make_div_pal_dark_mid(non_peak_sf$change)
 pal_nonpeak_percent <- make_div_pal_dark_mid(non_peak_sf$percent_change)
 
 
-# pal_peak <- colorNumeric(palette = "RdYlGn", domain = peak_sf$change, reverse = TRUE)
-# pal_peak_percent <- colorNumeric(palette = "RdYlGn", domain = peak_sf$percent_change, reverse = TRUE)
-# pal_nonpeak <- colorNumeric(palette = "RdYlGn", domain = non_peak_sf$change, reverse = TRUE)
-# pal_nonpeak_percent <- colorNumeric(palette = "RdYlGn", domain = non_peak_sf$percent_change, reverse = TRUE)
 
 leaflet() %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
