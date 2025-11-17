@@ -7,7 +7,7 @@ pa_state <- "PA"
 pa_counties <- c("Philadelphia", "Delaware", "Montgomery", "Bucks", "Chester")
 tracts <- tracts(state = pa_state, county = pa_counties, year = 2023, cb = TRUE, class = "sf") |>
   st_transform(4326)
-phila<- counties(state=pa_state, year=2023, cb=TRUE, class="sf")|>
+phila <- counties(state = pa_state, year = 2023, cb = TRUE, class = "sf") |>
   filter(NAME=="Philadelphia")|>
   st_transform(4326)
 
