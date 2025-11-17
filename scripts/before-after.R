@@ -69,11 +69,11 @@ library(RColorBrewer)
 make_div_pal_dark_mid <- function(x, n = 256) {
   # symmetric domain around 0
   lim <- max(abs(x), na.rm = TRUE)
-  
+
   # Custom diverging colors:
   #   dark red  → light red → mid gray → light blue → dark blue
   cols <- c("#264653", "#2a9d8f", "#edf2fb", "#f3722c", "#f94144")
-  
+
   colorNumeric(
     palette = colorRampPalette(cols)(n),
     domain  = c(-lim, lim)
