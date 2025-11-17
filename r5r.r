@@ -199,10 +199,10 @@ compute_travel_time_matrix <- function(network, origins_df, destinations_df, dep
 #   left_join(before_cuts_non_peak4, by="from_id")%>%
 #   left_join(before_cuts_non_peak5, by="from_id")%>%
 #   left_join(before_cuts_non_peak6, by="from_id")
-# 
+#
 # before_cuts_non_peak_final<- before_cuts_non_peak_final%>%
 #   mutate(average=(rowSums(across(starts_with("travel_time"))))/7)
-# 
+#
 # write.csv(before_cuts_non_peak_final, "data/outputs/before_cuts_non_peak_final.csv")
 
 # before_cuts6<- before_cuts6%>%
