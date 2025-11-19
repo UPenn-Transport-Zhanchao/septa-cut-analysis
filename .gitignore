@@ -51,3 +51,6 @@ rsconnect/
 
 # Mac files
 .DS_Store
+
+data/cut_network_build/*
+data/data_path_after/*
